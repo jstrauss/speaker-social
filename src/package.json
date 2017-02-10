@@ -1,0 +1,27 @@
+{
+  "name": "kcdcSpeakers",
+  "title": "KCDC Speakers",
+  "description": "Tools to manage KCDC speaker submissions",
+  "version": "0.1.0",
+  "private": true,
+  "main": "speakers.js",
+  "author": "Jeffrey S. Strauss <jeff@aranasoft.com> (http://github.com/jstrauss)",
+  "dependencies": {
+    "del": "^2.2.0",
+    "lodash": "^4.8.2",
+    "moment": "^2.11.2",
+    "twitter": "^1.7.0"
+  },
+  "devDependencies": {
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.4.3",
+    "express": "^4.13.4",
+    "http-proxy": "^1.13.1",
+    "open": "^0.0.5",
+    "serve-static": "^1.10.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp run"
+  }
+}
