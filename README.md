@@ -5,21 +5,23 @@
 This is a very simple application that I threw together to assist in
 reviewing submissions for the [Kansas City Developer
 Conference](http://www.kcdc.info "KCDC 2017") (KCDC) 2017 event. We may
-add additional features in time, but for now, it is a basic node.JS
+add additional features in time, but for now, it is a basic node.js
 application that pulls from remote third-party APIs to get a sense of
 reach and industry clout for presenters who are currently unknown to us.
 
-So long as you have the appropriate third-party accounts and API key,
+So long as you have the appropriate third-party accounts and API keys,
 you can use this for your own purposes.
 
 ## Environment
 
 This application was built using `node@6.9.4` and `npm@4.3.0`. Earlier
 versions of node.js may work, but this has not been tested. Variables
-are block-scoped using `let` declarations, which is unsupport in pre-`v6.x` versions of node.
+are block-scoped using `let` declarations, which is an unsupported
+feature in pre-`v6.x` versions of node.
 
 There is no build process associated, and therefore, no reliance upon
-gulp, grunt, webpack, babel, or any other specific build tools.
+gulp, grunt, webpack, babel, or any other specific build tools. You
+really just need node and npm.
 
 ## Required API Access
 
@@ -64,18 +66,23 @@ from git in the `.gitignore` file. It must contain at least the
 following:
 
 ```bash
+// .env
+
 TWITTER_CONSUMER_KEY=<your Twitter consumer key>
 TWITTER_CONSUMER_SECRET=<your Twitter consumer secret>
 PAPERCALLKEY=<your PaperCall.io API key>
 ```
 
-So long as the `.env` file is in place, you can run the application
-using `npm start` from the command line.
+So long as the `.env` file is in place, you can run the application:
+
+```bash
+$ npm start
+```
 
 ## Limitations
 
-The application current limits retrieval to 500 total submissions. This
-an be modified, up to any absolute API limitations from PaperCall, by
+The application currently limits retrieval to 500 total submissions. This
+can be modified, up to any underlying API limitations from PaperCall.io, by
 changing the `per_page` query string paramater at line 25 of
 `speakers.js`.
 
