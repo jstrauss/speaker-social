@@ -1,27 +1,18 @@
 {
-  "name": "kcdcSpeakers",
-  "title": "KCDC Speakers",
-  "description": "Tools to manage KCDC speaker submissions",
-  "version": "0.1.0",
+  "name": "speaker-social",
+  "title": "Speaker Social Media Review",
+  "description": "Tools to review social media impact of submitted conference speakers",
+  "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "main": "speakers.js",
   "author": "Jeffrey S. Strauss <jeff@aranasoft.com> (http://github.com/jstrauss)",
+  "os": [ "!win32" ],
   "dependencies": {
-    "del": "^2.2.0",
     "dotenv": "^4.0.0",
-    "lodash": "^4.8.2",
-    "moment": "^2.11.2",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "twitter": "^1.7.0"
-  },
-  "devDependencies": {
-    "cookie-parser": "^1.4.3",
-    "errorhandler": "^1.4.3",
-    "express": "^4.13.4",
-    "http-proxy": "^1.13.1",
-    "open": "^0.0.5",
-    "serve-static": "^1.10.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
