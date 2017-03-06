@@ -53,14 +53,43 @@ function GetFollowers(token, rawSubmissions) {
     bearer_token: token.access_token
   });
 
-  client.get('users/lookup', {screen_name: uniqueSpeakers.join(',')})
-    .then(function(response) {
-      response.sort((a, b) => b.followers_count - a.followers_count).forEach(t => {
+  let sliceIndex = 0;
+  let twitterPromises = [];
+  let responseArray = [];
+
+  // prepare each Twitter API call to resolve up to 100 handles
+  while (sliceIndex < uniqueSpeakers.length) {
+    twitterPromises.push(client.get('users/lookup', {screen_name: uniqueSpeakers.slice(sliceIndex, 100).join(',')})
+      .then(function(response) {
+        responseArray = responseArray.concat(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    );
+
+    sliceIndex += 100;
+  }
+
+  Promise.all(twitterPromises)
+    .then(function() {
+      responseArray.sort((a, b) => b.followers_count - a.followers_count).forEach(t => {
         console.log(`${t.name} (@${t.screen_name}): ${t.followers_count} followers`);
       });
       console.log();
-    })
-    .catch(function(error) {
-      throw error;
     });
+
+  /*
+   * DEPRECATED: This stopped working when the number of submitted presenters with
+   * Twitter handles exceeded 100, due to API limitations */
+  //client.get('users/lookup', {screen_name: uniqueSpeakers.join(',')})
+  //  .then(function(response) {
+  //    response.sort((a, b) => b.followers_count - a.followers_count).forEach(t => {
+  //      console.log(`${t.name} (@${t.screen_name}): ${t.followers_count} followers`);
+  //    });
+  //    console.log();
+  //  })
+  //  .catch(function(error) {
+  //    throw error;
+  //  });
 }
