@@ -45,7 +45,8 @@ function GetFollowers(token, rawSubmissions) {
     throw new Error(`Twitter API error.\nExpected "bearer" token type but received "${token.token_type}" instead.`);
   }
 
-  let uniqueSpeakers = [ ...new Set(rawSubmissions.map( s => s.profile.twitter )) ];
+  let uniqueSpeakers = [ ...new Set(rawSubmissions.map( s => s.profile.twitter )) ]
+    .filter(speaker => speaker !== '');
 
   let client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -59,7 +60,7 @@ function GetFollowers(token, rawSubmissions) {
 
   // prepare each Twitter API call to resolve up to 100 handles
   while (sliceIndex < uniqueSpeakers.length) {
-    twitterPromises.push(client.get('users/lookup', {screen_name: uniqueSpeakers.slice(sliceIndex, 100).join(',')})
+    twitterPromises.push(client.get('users/lookup', {screen_name: uniqueSpeakers.slice(sliceIndex, sliceIndex+100).join(',')})
       .then(function(response) {
         responseArray = responseArray.concat(response);
       })
