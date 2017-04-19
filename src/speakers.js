@@ -22,6 +22,7 @@ getTokenOptions = {
 getSubmissionsOptions = {
   uri: 'https://www.papercall.io/api/v1/submissions',
   qs: {
+    state: 'accepted',
     per_page: '500'
   },
   headers: { 'Authorization': process.env.PAPERCALL_KEY },
@@ -74,8 +75,13 @@ function GetFollowers(token, rawSubmissions) {
 
   Promise.all(twitterPromises)
     .then(function() {
+      let objectResult = [];
+      
       responseArray.sort((a, b) => b.followers_count - a.followers_count).forEach(t => {
-        console.log(`${t.name} (@${t.screen_name}): ${t.followers_count} followers`);
+        console.log(`${t.name} (@${t.screen_name}):`);
+        console.log(`${t.followers_count} followers`);
+        console.log(`${t.profile_image_url_https.replace('_normal.', '.')}`);
+        console.log('');
       });
       console.log();
     });
