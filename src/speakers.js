@@ -3,6 +3,7 @@ require('dotenv').load();
 
 let rp = require('request-promise');
 let Twitter = require('twitter');
+let jsonfile = require('jsonfile');
 
 let getTokenOptions, getSubmissionsOptions, oAuthToken;
 
@@ -75,15 +76,28 @@ function GetFollowers(token, rawSubmissions) {
 
   Promise.all(twitterPromises)
     .then(function() {
-      let objectResult = [];
+      let arrayResult = [];
       
       responseArray.sort((a, b) => b.followers_count - a.followers_count).forEach(t => {
         console.log(`${t.name} (@${t.screen_name}):`);
         console.log(`${t.followers_count} followers`);
-        console.log(`${t.profile_image_url_https.replace('_normal.', '.')}`);
+        console.log(`${t.profile_image_url.replace('_normal.', '.')}`);
         console.log('');
+
+        arrayResult.push({
+          name: t.name,
+          handle: t.screen_name,
+          followers: t.followers_count,
+          avatarUrl: t.profile_image_url.replace('_normal.', '.')
+        });
       });
       console.log();
+
+      let jsonResult = JSON.parse(JSON.stringify(arrayResult));
+      jsonfile.writeFile('./tmp/results.json', arrayResult, {spaces: 2}, function(err) {
+        if (err !== null) console.error(err);
+      });
+      //console.log(jsonResult);
     });
 
   /*

@@ -7,9 +7,12 @@
   "private": true,
   "main": "speakers.js",
   "author": "Jeffrey S. Strauss <jeff@aranasoft.com> (http://github.com/jstrauss)",
-  "os": [ "!win32" ],
+  "os": [
+    "!win32"
+  ],
   "dependencies": {
     "dotenv": "^4.0.0",
+    "jsonfile": "^2.4.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "twitter": "^1.7.0"

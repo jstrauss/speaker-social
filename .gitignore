@@ -1,3 +1,6 @@
+### Specific output directory ###
+tmp/
+
 ### node.JS stuff ###
 ~$*
 *~
